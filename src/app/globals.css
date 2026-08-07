@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: var(--font-cormorant), serif;
+  --font-sans: var(--font-jost), sans-serif;
+  --color-primary: #0F2747;
+  --color-accent: #B0894F;
+  --color-accent-light: #C9A96A;
+  --color-bg-light: #FBFAF8;
+  --color-text-dark: #1E2A3A;
+  --color-text-muted: #3A4759;
+}
+
+:root {
+  --background: #FBFAF8;
+  --foreground: #1E2A3A;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-jost), sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: #0F2747;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #B0894F;
+}
+
+::selection {
+  background: #0F2747;
+  color: #fff;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+}
+
+.reveal.in {
+  animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:88px}
+  body{font-family:'Jost',sans-serif;color:#1E2A3A;background:#FBFAF8;-webkit-font-smoothing:antialiased}
+  a{color:#0F2747;text-decoration:none}
+  a:hover{color:#B0894F}
+  ::selection{background:#0F2747;color:#fff}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+  .reveal{opacity:0}
+  .reveal.in{animation:fadeUp .9s cubic-bezier(.16,1,.3,1) forwards}
+</style>
+</helmet>
+
+<div style="max-width:100vw;overflow-x:hidden">
+
+<header style="position:sticky;top:0;z-index:100;background:rgba(251,250,248,.86);backdrop-filter:blur(14px);border-bottom:1px solid rgba(15,39,71,.09)">
+  <nav style="max-width:1280px;margin:0 auto;padding:0 40px;height:88px;display:flex;align-items:center;justify-content:space-between">
+    <a href="Atithis-Home.dc.html" style="display:flex;flex-direction:column;line-height:1">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:700;color:#0F2747;letter-spacing:.14em">ATITHIS</span>
+      <span style="font-size:9px;letter-spacing:.42em;color:#B0894F;margin-top:5px;text-transform:uppercase">Institute of Hospitality</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:38px">
+      <div style="display:flex;gap:30px;align-items:center">
+        <a href="Atithis-Home.dc.html" style="font-size:14px;letter-spacing:.04em;color:#3A4759">Home</a>
+        <a href="Atithis-About.dc.html" style="font-size:14px;letter-spacing:.04em;color:#3A4759">About Us</a>
+        <a href="Atithis-Program.dc.html" style="font-size:14px;letter-spacing:.04em;color:#3A4759">Program</a>
+        <a href="Atithis-Curriculum.dc.html" style="font-size:14px;letter-spacing:.04em;color:#3A4759">Curriculum</a>
+        <a href="Atithis-Team.dc.html" style="font-size:14px;letter-spacing:.04em;color:#0F2747;font-weight:500;border-bottom:1px solid #B0894F;padding-bottom:2px">Our Team</a>
+        <a href="Atithis-Admissions.dc.html" style="font-size:14px;letter-spacing:.04em;color:#3A4759">Admissions</a>
+        <a href="Atithis-Contact.dc.html" style="font-size:14px;letter-spacing:.04em;color:#3A4759">Contact</a>
+      </div>
+      <a href="Atithis-Admissions.dc.html" style="background:#0F2747;color:#fff;padding:13px 26px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;border:1px solid #0F2747;transition:all .3s" style-hover="background:#B0894F;border-color:#B0894F;color:#fff">Apply Now</a>
+    </div>
+  </nav>
+</header>
+
+<!-- PAGE HERO -->
+<section style="background:#0F2747;color:#fff;padding:110px 0 96px;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#0d2340 0 16px,#102a4c 16px 32px);opacity:.5"></div>
+  <div style="position:relative;max-width:1280px;margin:0 auto;padding:0 40px;text-align:center">
+    <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:24px">
+      <span style="width:44px;height:1px;background:#B0894F"></span>
+      <span style="font-size:12px;letter-spacing:.32em;color:#C9A96A;text-transform:uppercase">The People Behind Atithis</span>
+      <span style="width:44px;height:1px;background:#B0894F"></span>
+    </div>
+    <h1 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(42px,5.4vw,76px);line-height:1.05;color:#fff">Mentors who have run the finest houses</h1>
+    <p style="max-width:640px;margin:26px auto 0;font-size:18px;line-height:1.75;color:rgba(255,255,255,.78);font-weight:300">Our faculty and mentors bring decades of leadership across luxury hotels, resorts and hospitality groups — teaching not from theory, but from a lifetime on the floor.</p>
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section style="padding:110px 0 60px;background:#FBFAF8">
+  <div style="max-width:1280px;margin:0 auto;padding:0 40px">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:44px">
+      <span style="width:40px;height:1px;background:#B0894F"></span>
+      <span style="font-size:12px;letter-spacing:.3em;color:#B0894F;text-transform:uppercase">Leadership Team</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px">
+      <sc-for list="{{ leadership }}" as="m" hint-placeholder-count="3">
+        <div style="background:#fff;border:1px solid #e6e9ee;transition:all .4s;overflow:hidden" style-hover="transform:translateY(-6px);box-shadow:0 24px 48px -26px rgba(15,39,71,.3)">
+          <div style="aspect-ratio:1;background:repeating-linear-gradient(135deg,#e7eaef 0 14px,#eff2f6 14px 28px);display:flex;align-items:flex-end;padding:18px">
+            <span style="font-family:monospace;font-size:10px;letter-spacing:.1em;color:#8894a5">{{ m.tag }}</span>
+          </div>
+          <div style="padding:30px 28px">
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#0F2747">{{ m.name }}</h3>
+            <div style="font-size:13px;letter-spacing:.06em;color:#B0894F;margin-top:6px;text-transform:uppercase">{{ m.title }}</div>
+            <p style="margin-top:16px;font-size:14px;line-height:1.75;color:#5A6879;font-weight:300">{{ m.bio }}</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:22px;padding-top:18px;border-top:1px solid #eef1f4">
+              <span style="font-size:12px;color:#8894a5">{{ m.exp }}</span>
+              <span style="font-size:11px;letter-spacing:.14em;color:#B0894F;text-transform:uppercase">in</span>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- FACULTY -->
+<section style="padding:60px 0;background:#FBFAF8">
+  <div style="max-width:1280px;margin:0 auto;padding:0 40px">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:44px">
+      <span style="width:40px;height:1px;background:#B0894F"></span>
+      <span style="font-size:12px;letter-spacing:.3em;color:#B0894F;text-transform:uppercase">Academic Faculty</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px">
+      <sc-for list="{{ faculty }}" as="m" hint-placeholder-count="4">
+        <div style="background:#fff;border:1px solid #e6e9ee;transition:all .4s;overflow:hidden" style-hover="transform:translateY(-5px);box-shadow:0 20px 40px -24px rgba(15,39,71,.28)">
+          <div style="aspect-ratio:4/5;background:repeating-linear-gradient(135deg,#e7eaef 0 12px,#eff2f6 12px 24px);display:flex;align-items:flex-end;padding:14px">
+            <span style="font-family:monospace;font-size:9px;letter-spacing:.1em;color:#8894a5">{{ m.tag }}</span>
+          </div>
+          <div style="padding:22px 20px">
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:21px;color:#0F2747">{{ m.name }}</h3>
+            <div style="font-size:12px;color:#B0894F;margin-top:5px;letter-spacing:.04em">{{ m.title }}</div>
+            <p style="margin-top:12px;font-size:13px;line-height:1.65;color:#6A7889;font-weight:300">{{ m.spec }}</p>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- MENTORS + ADVISORY (dark) -->
+<section style="padding:110px 0;background:#0B1D36;color:#fff;margin-top:50px">
+  <div style="max-width:1280px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1fr 1fr;gap:64px">
+    <div>
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:36px">
+        <span style="width:40px;height:1px;background:#B0894F"></span>
+        <span style="font-size:12px;letter-spacing:.3em;color:#C9A96A;text-transform:uppercase">Industry Mentors & Visiting Experts</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:2px">
+        <sc-for list="{{ mentors }}" as="m" hint-placeholder-count="5">
+          <div style="display:flex;gap:20px;align-items:center;padding:20px 0;border-bottom:1px solid rgba(255,255,255,.1)">
+            <div style="width:56px;height:56px;border-radius:50%;background:repeating-linear-gradient(135deg,#16304f 0 8px,#1b3a5e 8px 16px);flex-shrink:0"></div>
+            <div style="flex:1">
+              <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#fff">{{ m.name }}</h3>
+              <div style="font-size:13px;color:rgba(255,255,255,.62);margin-top:3px">{{ m.title }}</div>
+            </div>
+            <span style="font-size:12px;color:#C9A96A;letter-spacing:.06em">{{ m.exp }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.14);padding:48px">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:28px">
+        <span style="width:40px;height:1px;background:#B0894F"></span>
+        <span style="font-size:12px;letter-spacing:.3em;color:#C9A96A;text-transform:uppercase">Advisory Board</span>
+      </div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:30px;line-height:1.15;color:#fff">Guided by leaders of the industry</h3>
+      <p style="margin-top:16px;font-size:15px;line-height:1.75;color:rgba(255,255,255,.72);font-weight:300">Our advisory board shapes the curriculum to meet the evolving standards of luxury and boutique hospitality worldwide.</p>
+      <div style="margin-top:30px;display:flex;flex-direction:column;gap:16px">
+        <sc-for list="{{ advisory }}" as="a" hint-placeholder-count="4">
+          <div style="display:flex;gap:14px;align-items:center;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.1)">
+            <span style="color:#C9A96A;font-size:14px">◆</span>
+            <div>
+              <div style="font-size:16px;color:#fff">{{ a.name }}</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:2px">{{ a.title }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding:100px 0;background:#FBFAF8;text-align:center">
+  <div style="max-width:720px;margin:0 auto;padding:0 40px">
+    <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(32px,3.6vw,48px);line-height:1.1;color:#0F2747">Learn from those who have set the standard</h2>
+    <div style="display:flex;gap:16px;justify-content:center;margin-top:34px;flex-wrap:wrap">
+      <a href="Atithis-Admissions.dc.html" style="background:#0F2747;color:#fff;padding:16px 36px;font-size:14px;letter-spacing:.1em;text-transform:uppercase;transition:all .3s" style-hover="background:#B0894F">Apply Now</a>
+      <a href="Atithis-Contact.dc.html" style="border:1px solid #0F2747;color:#0F2747;padding:16px 36px;font-size:14px;letter-spacing:.1em;text-transform:uppercase;transition:all .3s" style-hover="background:#0F2747;color:#fff">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<footer style="background:#0B1D36;color:#fff;padding:80px 0 36px">
+  <div style="max-width:1280px;margin:0 auto;padding:0 40px">
+    <div style="display:grid;grid-template-columns:1.6fr 1fr 1fr 1.4fr;gap:48px;padding-bottom:56px;border-bottom:1px solid rgba(255,255,255,.12)">
+      <div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:700;letter-spacing:.14em;color:#fff">ATITHIS</div>
+        <div style="font-size:9px;letter-spacing:.42em;color:#C9A96A;margin-top:5px;text-transform:uppercase">Institute of Hospitality</div>
+        <p style="margin-top:22px;font-size:14px;line-height:1.8;color:rgba(255,255,255,.6);font-weight:300;max-width:280px">Developing the future stewards of boutique hotels, wellness resorts and holiday-home communities — the Atithis Way.</p>
+      </div>
+      <div>
+        <h4 style="font-size:12px;letter-spacing:.2em;color:#C9A96A;text-transform:uppercase;margin-bottom:20px">Explore</h4>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <a href="Atithis-Home.dc.html" style="font-size:14px;color:rgba(255,255,255,.7)">Home</a>
+          <a href="Atithis-About.dc.html" style="font-size:14px;color:rgba(255,255,255,.7)">About Us</a>
+          <a href="Atithis-Program.dc.html" style="font-size:14px;color:rgba(255,255,255,.7)">Program</a>
+          <a href="Atithis-Curriculum.dc.html" style="font-size:14px;color:rgba(255,255,255,.7)">Curriculum</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-size:12px;letter-spacing:.2em;color:#C9A96A;text-transform:uppercase;margin-bottom:20px">Institute</h4>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <a href="Atithis-Team.dc.html" style="font-size:14px;color:rgba(255,255,255,.7)">Our Team</a>
+          <a href="Atithis-Admissions.dc.html" style="font-size:14px;color:rgba(255,255,255,.7)">Admissions</a>
+          <a href="Atithis-Contact.dc.html" style="font-size:14px;color:rgba(255,255,255,.7)">Contact</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-size:12px;letter-spacing:.2em;color:#C9A96A;text-transform:uppercase;margin-bottom:20px">Newsletter</h4>
+        <p style="font-size:14px;color:rgba(255,255,255,.6);font-weight:300;line-height:1.7;margin-bottom:16px">Admissions dates and hospitality insights, occasionally.</p>
+        <div style="display:flex;border:1px solid rgba(255,255,255,.2)">
+          <input placeholder="Your email" style="flex:1;background:transparent;border:none;padding:13px 14px;color:#fff;font-family:inherit;font-size:14px" style-focus="outline:none">
+          <button style="background:#B0894F;color:#fff;border:none;padding:0 20px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer">Join</button>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;padding-top:28px">
+      <span style="font-size:13px;color:rgba(255,255,255,.5)">© 2026 Atithis Institute of Hospitality. All rights reserved.</span>
+      <div style="display:flex;gap:26px">
+        <a href="#" style="font-size:13px;color:rgba(255,255,255,.5)">Privacy Policy</a>
+        <a href="#" style="font-size:13px;color:rgba(255,255,255,.5)">Terms &amp; Conditions</a>
+        <a href="#" style="font-size:13px;color:rgba(255,255,255,.5)">LinkedIn</a>
+        <a href="#" style="font-size:13px;color:rgba(255,255,255,.5)">Instagram</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount(){
+    document.querySelectorAll('.reveal').forEach((el,i)=>{
+      const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*80);io.disconnect();}});},{threshold:.15});
+      io.observe(el);
+    });
+  }
+  renderVals(){
+    const leadership=[
+      {name:'[ Founder Name ]',title:'Founder & Chairman',bio:'A career built across flagship luxury properties, now devoted to shaping the next generation of Indian hospitality leaders.',exp:'30+ years in luxury hospitality',tag:'[ portrait — founder ]'},
+      {name:'[ Director Name ]',title:'Director, Academics',bio:'Architect of the Atithis curriculum, blending international operating standards with the warmth of Atithi Devo Bhava.',exp:'25+ years · hotel operations',tag:'[ portrait — director ]'},
+      {name:'[ Dean Name ]',title:'Dean of Hospitality',bio:'Former General Manager of award-winning boutique resorts, leading faculty and the live-training partnerships.',exp:'22+ years · resort management',tag:'[ portrait — dean ]'}
+    ];
+    const faculty=[
+      {name:'[ Faculty Name ]',title:'Rooms Division',spec:'Front office, housekeeping and luxury guest experience.',tag:'[ faculty ]'},
+      {name:'[ Faculty Name ]',title:'Food & Beverage',spec:'Fine dining service, villa dining and banquet operations.',tag:'[ faculty ]'},
+      {name:'[ Faculty Name ]',title:'Revenue & Commercial',spec:'Revenue management, distribution and reputation.',tag:'[ faculty ]'},
+      {name:'[ Faculty Name ]',title:'Soft Skills & Etiquette',spec:'Communication, grooming and luxury etiquette.',tag:'[ faculty ]'},
+      {name:'[ Faculty Name ]',title:'Engineering & Asset Care',spec:'Preventive maintenance, safety and sustainability.',tag:'[ faculty ]'},
+      {name:'[ Faculty Name ]',title:'Hospitality Technology',spec:'PMS, CRM, channel management and AI in hospitality.',tag:'[ faculty ]'},
+      {name:'[ Faculty Name ]',title:'Leadership & Culture',spec:'Team building, performance and conflict resolution.',tag:'[ faculty ]'},
+      {name:'[ Faculty Name ]',title:'Wellness & Spa',spec:'Spa operations and wellness guest journeys.',tag:'[ faculty ]'}
+    ];
+    const mentors=[
+      {name:'[ Mentor Name ]',title:'Former GM · Luxury Resort Group',exp:'28 yrs'},
+      {name:'[ Mentor Name ]',title:'VP Operations · Boutique Hotel Brand',exp:'24 yrs'},
+      {name:'[ Mentor Name ]',title:'Executive Chef · Heritage Hotel',exp:'20 yrs'},
+      {name:'[ Mentor Name ]',title:'Director of Revenue · Hospitality Group',exp:'18 yrs'},
+      {name:'[ Mentor Name ]',title:'Head of Guest Experience · Wellness Retreat',exp:'16 yrs'}
+    ];
+    const advisory=[
+      {name:'[ Advisor Name ]',title:'Hospitality Industry Veteran'},
+      {name:'[ Advisor Name ]',title:'Hotel Ownership & Asset Management'},
+      {name:'[ Advisor Name ]',title:'Luxury Brand & Service Design'},
+      {name:'[ Advisor Name ]',title:'Tourism & Destination Development'}
+    ];
+    return { leadership, faculty, mentors, advisory };
+  }
+}
+</script>
+</body>
+</html>
