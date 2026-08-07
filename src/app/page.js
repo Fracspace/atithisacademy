@@ -200,10 +200,10 @@ export default function Home() {
             </div>
             <div className="relative reveal mt-12 lg:mt-0">
               <div className="aspect-[4/5] shadow-[0_40px_80px_-40px_rgba(15,39,71,0.4)] relative">
-                <Image src={heroImg} className="w-auto h-auto" id="home-hero-main" alt="Upload hero image — luxury arrival / lobby" />
+                <Image src={heroImg} fill className="object-cover" id="home-hero-main" alt="Upload hero image — luxury arrival / lobby" />
               </div>
               <div className="absolute -bottom-[46px] -left-[46px] w-[200px] h-[250px] border-[10px] border-bg-light shadow-[0_30px_60px_-30px_rgba(15,39,71,0.4)] hidden md:block">
-                <Image src={greetingImg} className="w-auto h-auto" id="home-hero-sub" alt="Upload — guest experience" />
+                <Image src={greetingImg} fill className="object-cover" id="home-hero-sub" alt="Upload — guest experience" />
               </div>
               <div className="absolute top-[26px] -right-5 bg-primary text-white py-5 px-[26px] text-center shadow-[0_20px_40px_-20px_rgba(15,39,71,0.5)]">
                 <div className="font-serif text-[40px] font-semibold leading-none text-accent-light">90</div>
@@ -228,8 +228,8 @@ export default function Home() {
           <div className="max-w-[1280px] mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
               <div className="relative">
-                <div className="aspect-[5/4] shadow-[0_34px_70px_-40px_rgba(15,39,71,0.35)]">
-                  <Image src={hospitalityTeamImg} id="home-about" className="w-auto h-auto" alt="Upload — campus / heritage courtyard" />
+                <div className="aspect-[5/4] shadow-[0_34px_70px_-40px_rgba(15,39,71,0.35)] relative">
+                  <Image src={hospitalityTeamImg} fill className="object-cover" id="home-about" alt="Upload — campus / heritage courtyard" />
                 </div>
                 <div className="absolute -bottom-[34px] right-[10%] lg:-right-[34px] w-[90%] sm:w-[58%] aspect-[16/10] bg-primary text-white p-[30px] flex flex-col justify-center">
                   <span className="font-serif text-[23px] italic leading-snug text-white">"Leave every place better than you found it."</span>
