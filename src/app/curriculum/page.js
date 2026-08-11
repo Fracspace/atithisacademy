@@ -367,12 +367,12 @@ export default function Curriculum() {
                   >
                     <button
                       onClick={() => setOpenWeek(isOpen ? null : w.num)}
-                      className="w-full flex items-center gap-5.5 p-6 sm:p-[26px_32px] bg-transparent border-none cursor-pointer text-left"
+                      className="w-full flex items-center gap-3 sm:gap-5.5 p-5 sm:p-[26px_32px] bg-transparent border-none cursor-pointer text-left"
                     >
-                      <span className="font-serif text-[26px] text-accent min-w-[76px] font-medium">W{w.num}</span>
-                      <span className="flex-grow font-serif text-[20px] text-primary font-bold">{w.title}</span>
+                      <span className="font-serif text-[20px] sm:text-[26px] text-accent min-w-[48px] sm:min-w-[76px] font-medium">W{w.num}</span>
+                      <span className="flex-grow font-serif text-[17px] sm:text-[20px] text-primary font-bold">{w.title}</span>
                       <span
-                        className={`text-[26px] text-accent font-light transition-transform duration-300 ${
+                        className={`text-[20px] sm:text-[26px] text-accent font-light transition-transform duration-300 ${
                           isOpen ? "rotate-45" : "rotate-0"
                         }`}
                       >
@@ -427,7 +427,7 @@ export default function Curriculum() {
               </Link>
               <Link
                 href="/program"
-                className="border border-white/40 text-white px-9 py-4 text-[14px] tracking-[0.1em] uppercase hover:border-white hover:bg-white/6 transition-all duration-300"
+                className="border border-white/40 !text-white px-9 py-4 text-[14px] tracking-[0.1em] uppercase hover:border-accent-light hover:!text-accent-light hover:bg-transparent transition-all duration-300"
               >
                 Program Overview
               </Link>

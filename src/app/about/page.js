@@ -84,12 +84,12 @@ export default function About() {
         {/* PHILOSOPHY */}
         <section className="py-24 bg-bg-light px-5 sm:px-10">
           <div className="max-w-[1280px] mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-              <div className="relative">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+              <div className="relative mb-12 lg:mb-0">
                 <div className="aspect-[4/5] shadow-[0_34px_70px_-40px_rgba(15,39,71,0.35)]">
                   <Image id="about-main" src={aboutImg} className="fill" alt="Upload — campus / heritage architecture" />
                 </div>
-                <div className="absolute -bottom-9 -left-9 w-[56%] aspect-square bg-accent text-white p-[30px] flex flex-col justify-center">
+                <div className="absolute -bottom-9 left-4 sm:left-auto sm:-left-9 w-[calc(100%-32px)] sm:w-[56%] aspect-square bg-accent text-white p-[30px] flex flex-col justify-center">
                   <span className="font-serif text-[22px] italic leading-snug">Atithi Devo Bhava — the guest is divine.</span>
                 </div>
               </div>
@@ -141,34 +141,34 @@ export default function About() {
               </div>
               <h2 className="font-serif font-semibold text-[36px] sm:text-[56px] leading-[1.08] text-white">The Five Pillars of Atithis</h2>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-14 items-start">
-              <div className="flex flex-col gap-0.5">
+            <div className="grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-10 lg:gap-14 items-start">
+              <div className="flex flex-row overflow-x-auto lg:flex-col gap-2 lg:gap-0.5 pb-4 lg:pb-0 scrollbar-none">
                 {pillars.map((p, i) => {
                   const isActive = i === activePillar;
                   return (
                     <button
                       key={p.n}
                       onClick={() => setActivePillar(i)}
-                      className={`flex items-center gap-[18px] p-[22px_24px] border-l-2 transition-all duration-300 font-sans text-left cursor-pointer ${isActive
+                      className={`flex items-center gap-[18px] p-[16px_20px] lg:p-[22px_24px] border-l-2 transition-all duration-300 font-sans text-left cursor-pointer flex-shrink-0 ${isActive
                         ? "bg-accent-light/12 border-accent-light text-white"
                         : "bg-transparent border-white/14 text-white/70 hover:text-white"
                         }`}
                     >
                       <span
-                        className={`font-serif text-[22px] min-w-[44px] text-left transition-colors duration-300 ${isActive ? "text-accent-light" : "text-white/40"
+                        className={`font-serif text-[20px] lg:text-[22px] min-w-[36px] lg:min-w-[44px] text-left transition-colors duration-300 ${isActive ? "text-accent-light" : "text-white/40"
                           }`}
                       >
                         {p.n}
                       </span>
-                      <span className="text-[17px] tracking-[0.06em] font-medium">{p.name}</span>
+                      <span className="text-[15px] lg:text-[17px] tracking-[0.06em] font-medium">{p.name}</span>
                     </button>
                   );
                 })}
               </div>
-              <div className="border border-white/14 p-10 sm:p-14 min-h-[340px] flex flex-col justify-center bg-white/2">
-                <span className="font-serif text-[80px] text-accent-light/28 leading-none">{pillars[activePillar].n}</span>
-                <h3 className="font-serif text-[44px] text-white -mt-3.5 leading-snug">{pillars[activePillar].name}</h3>
-                <p className="mt-5 text-[19px] leading-relaxed text-white/82 font-light max-w-[520px]">
+              <div className="border border-white/14 p-8 sm:p-14 min-h-[300px] lg:min-h-[340px] flex flex-col justify-center bg-white/2">
+                <span className="font-serif text-[60px] lg:text-[80px] text-accent-light/28 leading-none">{pillars[activePillar].n}</span>
+                <h3 className="font-serif text-[36px] lg:text-[44px] text-white -mt-2 lg:-mt-3.5 leading-snug">{pillars[activePillar].name}</h3>
+                <p className="mt-4 lg:mt-5 text-[17px] lg:text-[19px] leading-relaxed text-white/82 font-light max-w-[520px]">
                   {pillars[activePillar].long}
                 </p>
               </div>
@@ -205,7 +205,7 @@ export default function About() {
               </Link>
               <Link
                 href="/admissions#apply"
-                className="border border-white/40 text-white px-9 py-4 text-[14px] tracking-[0.1em] uppercase hover:border-white hover:bg-white/6 transition-all duration-300"
+                className="border border-white/40 !text-white px-9 py-4 text-[14px] tracking-[0.1em] uppercase hover:border-accent-light hover:!text-accent-light hover:bg-transparent transition-all duration-300"
               >
                 Apply Now
               </Link>

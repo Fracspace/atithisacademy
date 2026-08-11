@@ -203,7 +203,10 @@ export default function Program() {
           <div className="max-w-[1280px] mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4">
               {facts.map((f, idx) => (
-                <div key={idx} className="py-9 px-6 text-center border-r border-white/10 last:border-r-0">
+                <div
+                  key={idx}
+                  className="py-9 px-6 text-center border-b border-white/10 last:border-b-0 odd:border-r md:border-b-0 md:border-r md:last:border-r-0"
+                >
                   <div className="text-[11px] tracking-[0.2em] text-accent-light uppercase font-semibold">{f.label}</div>
                   <div className="font-serif text-[30px] text-white mt-2 leading-none font-medium">{f.value}</div>
                 </div>
@@ -419,12 +422,12 @@ export default function Program() {
         {/* INTERNSHIP */}
         <section className="py-24 bg-white px-5 sm:px-10">
           <div className="max-w-[1280px] mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-20 items-center">
-              <div className="relative">
+            <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-20 items-center">
+              <div className="relative mb-12 lg:mb-0">
                 <div className="aspect-[5/4] shadow-[0_34px_70px_-40px_rgba(15,39,71,0.35)]">
                   <Image src={internImg} className="w-auto h-auto" id="program-internship" alt="Upload — internship / resort operations floor" />
                 </div>
-                <div className="absolute -top-7 -right-7 bg-accent text-white py-6 px-7.5 text-center shadow-lg">
+                <div className="absolute -top-7 -right-2 sm:-right-7 bg-accent text-white py-6 px-7.5 text-center shadow-lg">
                   <div className="font-serif text-[46px] font-semibold leading-none">90</div>
                   <div className="text-[11px] tracking-[0.2em] uppercase mt-1">Day Paid Internship</div>
                 </div>
@@ -468,9 +471,9 @@ export default function Program() {
                 A clear road to General Manager
               </h2>
             </div>
-            <div className="flex flex-wrap items-stretch justify-center gap-4 lg:gap-0">
+            <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-6 sm:gap-4 lg:gap-0">
               {pathway.map((p, idx) => (
-                <div key={idx} className="flex items-center">
+                <div key={idx} className="flex flex-col sm:flex-row items-center">
                   <div className="text-center px-2">
                     <div
                       style={{ background: p.fill, color: p.txt, borderColor: p.ring }}
@@ -483,7 +486,10 @@ export default function Program() {
                     </div>
                   </div>
                   {p.arrow && (
-                    <span className="text-accent text-[22px] mx-1.5 lg:mx-3 self-start mt-6 hidden sm:inline-block">→</span>
+                    <>
+                      <span className="text-accent text-[22px] mx-1.5 lg:mx-3 mt-6 hidden sm:inline-block">→</span>
+                      <span className="text-accent text-[22px] my-3 sm:hidden">↓</span>
+                    </>
                   )}
                 </div>
               ))}
@@ -506,7 +512,7 @@ export default function Program() {
               </Link>
               <Link
                 href="/curriculum"
-                className="border border-white/40 text-white px-9 py-4 text-[14px] tracking-[0.1em] uppercase hover:border-white hover:bg-white/6 transition-all duration-300"
+                className="border border-white/40 !text-white px-9 py-4 text-[14px] tracking-[0.1em] uppercase hover:border-accent-light hover:!text-accent-light hover:bg-transparent transition-all duration-300"
               >
                 View Curriculum
               </Link>

@@ -95,7 +95,7 @@ export default function Contact() {
                 ))}
               </div>
             </div>
-            <div className="bg-white border border-[#e6e9ee] p-10 sm:p-13">
+            <div className="bg-white border border-[#e6e9ee] p-6 sm:p-13">
               <h2 className="font-serif text-[32px] text-primary font-bold">Send us a message</h2>
               {submitted ? (
                 <div className="flex flex-col items-center justify-center py-14 text-center">

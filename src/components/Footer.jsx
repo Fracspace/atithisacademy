@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
+import logoImg from "@/assets/logo.png";
 
 export default function Footer() {
   return (
@@ -6,8 +8,9 @@ export default function Footer() {
       <div className="max-w-[1280px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-14 border-b border-white/12">
           <div>
-            <div className="font-serif text-[30px] font-bold letter-spacing-[.14em] text-white">ATITHIS</div>
-            <div className="text-[9px] tracking-[.42em] text-accent-light mt-1.5 uppercase">Institute of Hospitality</div>
+            <div className="mb-4">
+              <Image src={logoImg} alt="ATITHIS logo" className="h-14 w-auto object-contain brightness-0 invert" />
+            </div>
             <p className="mt-[22px] text-[14px] leading-[1.8] text-white/60 font-light max-w-[280px]">
               Developing the future stewards of boutique hotels, wellness resorts and holiday-home communities — the Atithis Way.
             </p>

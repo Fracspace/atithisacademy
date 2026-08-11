@@ -160,7 +160,7 @@ export default function Home() {
         {/* HERO */}
         <section className="bg-bg-light py-16 md:py-24 relative overflow-hidden px-5 sm:px-10">
           <div className="absolute -top-[120px] -right-[120px] w-[420px] h-[420px] border border-accent/18 rounded-full pointer-events-none"></div>
-          <div className="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-[1.02fr_0.98fr] gap-[72px] items-center relative">
+          <div className="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-[1.02fr_0.98fr] gap-10 lg:gap-[72px] items-center relative">
             <div>
               <div className="flex items-center gap-4 mb-6 reveal">
                 <span className="w-13 h-[1px] bg-accent"></span>
@@ -205,7 +205,7 @@ export default function Home() {
               <div className="absolute -bottom-[46px] -left-[46px] w-[200px] h-[250px] border-[10px] border-bg-light shadow-[0_30px_60px_-30px_rgba(15,39,71,0.4)] hidden md:block">
                 <Image src={greetingImg} fill className="object-cover" id="home-hero-sub" alt="Upload — guest experience" />
               </div>
-              <div className="absolute top-[26px] -right-5 bg-primary text-white py-5 px-[26px] text-center shadow-[0_20px_40px_-20px_rgba(15,39,71,0.5)]">
+              <div className="absolute top-[26px] -right-2 sm:-right-5 bg-primary text-white py-5 px-[26px] text-center shadow-[0_20px_40px_-20px_rgba(15,39,71,0.5)]">
                 <div className="font-serif text-[40px] font-semibold leading-none text-accent-light">90</div>
                 <div className="text-[10px] tracking-[0.18em] uppercase mt-1 text-white/85">Day Paid Internship</div>
               </div>
@@ -214,8 +214,8 @@ export default function Home() {
         </section>
 
         {/* TRUST STRIP */}
-        <div className="bg-[#0B1D36] py-5.5 text-white px-5 sm:px-10">
-          <div className="max-w-[1280px] mx-auto flex flex-wrap justify-between gap-6 items-center">
+        <div className="bg-[#0B1D36] py-6 text-white px-5 sm:px-10">
+          <div className="max-w-[1280px] mx-auto flex flex-col md:flex-row md:flex-wrap justify-between gap-6 items-center text-center md:text-left">
             <span className="text-[12px] tracking-[0.28em] text-accent-light uppercase">Atithi Devo Bhava</span>
             <span className="text-[13px] tracking-[0.1em] text-white/55">Guaranteed 90-Day Paid Internship</span>
             <span className="text-[13px] tracking-[0.1em] text-white/55">6 Days a Week · Classroom + Simulation + Live Training</span>
@@ -226,12 +226,12 @@ export default function Home() {
         {/* ABOUT TEASER */}
         <section className="py-24 md:py-32 bg-bg-light px-5 sm:px-10">
           <div className="max-w-[1280px] mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-              <div className="relative">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+              <div className="relative mb-12 lg:mb-0">
                 <div className="aspect-[5/4] shadow-[0_34px_70px_-40px_rgba(15,39,71,0.35)] relative">
                   <Image src={hospitalityTeamImg} fill className="object-cover" id="home-about" alt="Upload — campus / heritage courtyard" />
                 </div>
-                <div className="absolute -bottom-[34px] right-[10%] lg:-right-[34px] w-[90%] sm:w-[58%] aspect-[16/10] bg-primary text-white p-[30px] flex flex-col justify-center">
+                <div className="absolute -bottom-[34px] left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-auto lg:-right-[34px] w-[90%] sm:w-[58%] aspect-[16/10] bg-primary text-white p-[30px] flex flex-col justify-center">
                   <span className="font-serif text-[23px] italic leading-snug text-white">"Leave every place better than you found it."</span>
                   <span className="text-[11px] tracking-[0.24em] text-accent-light mt-3.5 uppercase">— The Atithis Oath</span>
                 </div>
@@ -247,7 +247,7 @@ export default function Home() {
                 <p className="mt-6 text-[17px] leading-relaxed text-text-muted font-light">
                   Atithis develops hospitality professionals capable of operating world-class boutique hotels, wellness resorts and holiday-home communities. Every module is built around the Five Pillars of Atithis — and here, there are no departmental silos.
                 </p>
-                <div className="flex gap-11 mt-10">
+                <div className="flex gap-6 sm:gap-11 mt-10">
                   <div>
                     <div className="font-serif text-[38px] text-primary font-semibold">05</div>
                     <div className="text-[13px] text-[#7A8798] mt-1">Pillars</div>
@@ -287,7 +287,7 @@ export default function Home() {
               {pillars.map((p, idx) => (
                 <div
                   key={idx}
-                  className="p-[36px_24px] border-r border-white/12 last:border-r-0 hover:bg-accent-light/8 transition-colors duration-300"
+                  className="p-[36px_24px] border-b md:border-b-0 md:border-r border-white/12 last:border-b-0 md:last:border-r-0 hover:bg-accent-light/8 transition-colors duration-300"
                 >
                   <span className="font-serif text-[30px] text-accent-light/50">{p.n}</span>
                   <h3 className="font-serif text-[26px] text-white mt-2">{p.name}</h3>
@@ -357,7 +357,10 @@ export default function Home() {
             </div>
             <div className="grid grid-cols-2 lg:grid-cols-4 border-y border-white/16 mb-[60px]">
               {placementStats.map((p, idx) => (
-                <div key={idx} className="py-10 px-6 text-center border-r border-white/12 last:border-r-0">
+                <div
+                  key={idx}
+                  className="py-10 px-6 text-center border-b border-white/12 last:border-b-0 odd:border-r lg:border-b-0 lg:border-r lg:last:border-r-0"
+                >
                   <div className="font-serif text-[54px] font-semibold text-accent-light leading-none">{p.value}</div>
                   <div className="text-[13px] tracking-[0.06em] text-white/70 mt-2.5">{p.label}</div>
                 </div>
@@ -441,7 +444,7 @@ export default function Home() {
               </Link>
               <Link
                 href="/contact"
-                className="border border-white/40 text-white px-10 py-[17px] text-[14px] tracking-[0.1em] uppercase hover:border-white hover:bg-white/6 transition-all duration-300"
+                className="border border-white/40 !text-white px-10 py-[17px] text-[14px] tracking-[0.1em] uppercase hover:border-accent-light hover:!text-accent-light hover:bg-transparent transition-all duration-300"
               >
                 Contact Us
               </Link>

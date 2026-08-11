@@ -99,7 +99,10 @@ export default function Admissions() {
           <div className="max-w-[1280px] mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4">
               {facts.map((f, idx) => (
-                <div key={idx} className="py-9 px-6 text-center border-r border-white/10 last:border-r-0">
+                <div
+                  key={idx}
+                  className="py-9 px-6 text-center border-b border-white/10 last:border-b-0 odd:border-r md:border-b-0 md:border-r md:last:border-r-0"
+                >
                   <div className="text-[11px] tracking-[0.2em] text-accent-light uppercase font-semibold">{f.label}</div>
                   <div className="font-serif text-[30px] text-white mt-2 leading-none font-medium">{f.value}</div>
                 </div>
@@ -110,7 +113,7 @@ export default function Admissions() {
 
         {/* ELIGIBILITY + PROCESS */}
         <section className="py-24 bg-bg-light px-5 sm:px-10">
-          <div className="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-[72px] items-start">
+          <div className="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-[72px] items-start">
             <div>
               <div className="flex items-center gap-3.5 mb-5.5">
                 <span className="w-10 h-[1px] bg-accent"></span>
@@ -187,7 +190,7 @@ export default function Admissions() {
         <section id="apply" className="pb-32 bg-bg-light px-5 sm:px-10">
           <div className="max-w-[1080px] mx-auto">
             <div className="bg-white border border-[#e6e9ee] grid grid-cols-1 lg:grid-cols-[1fr_1.2fr]">
-              <div className="bg-primary text-white p-14 px-12 flex flex-col justify-between">
+              <div className="bg-primary text-white p-8 sm:p-14 sm:px-12 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-3.5 mb-5.5">
                     <span className="w-10 h-[1px] bg-accent"></span>
@@ -201,13 +204,13 @@ export default function Admissions() {
                 <div className="mt-10">
                   <a
                     href="#"
-                    className="inline-flex items-center gap-3 border border-white/35 text-white p-[15px_26px] text-[13px] tracking-[0.1em] uppercase hover:border-accent-light hover:text-accent-light transition-all duration-300 font-semibold"
+                    className="inline-flex items-center gap-3 border border-white/35 !text-white p-[15px_26px] text-[13px] tracking-[0.1em] uppercase hover:border-accent-light hover:!text-accent-light hover:bg-transparent transition-all duration-300 font-semibold"
                   >
                     ↓ Download Brochure
                   </a>
                 </div>
               </div>
-              <div className="p-14 px-12">
+              <div className="p-8 sm:p-14 sm:px-12">
                 {submitted ? (
                   <div className="flex flex-col items-center justify-center h-full text-center py-10">
                     <span className="font-serif text-[40px] text-accent italic font-medium">Thank you</span>
