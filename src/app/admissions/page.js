@@ -201,14 +201,14 @@ export default function Admissions() {
                     Complete the form and our admissions team will contact you with dates, eligibility guidance and next steps.
                   </p>
                 </div>
-                <div className="mt-10">
+                {/* <div className="mt-10">
                   <a
                     href="#"
                     className="inline-flex items-center gap-3 border border-white/35 !text-white p-[15px_26px] text-[13px] tracking-[0.1em] uppercase hover:border-accent-light hover:!text-accent-light hover:bg-transparent transition-all duration-300 font-semibold"
                   >
                     ↓ Download Brochure
                   </a>
-                </div>
+                </div> */}
               </div>
               <div className="p-8 sm:p-14 sm:px-12">
                 {submitted ? (

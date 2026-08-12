@@ -8,7 +8,7 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
 
   const contacts = [
-    { icon: "✉", label: "Email", value: "admissions@atithis.in" },
+    { icon: "✉", label: "Email", value: "admissions@atithis.academy" },
     { icon: "☏", label: "Phone", value: "9247952344" },
     { icon: "⌂", label: "Campus", value: "Road No 12, Banjara Hills, Hyderabad" },
   ];
@@ -152,8 +152,6 @@ export default function Contact() {
             </div>
           </div>
         </section>
-
-
       </main>
 
       <Footer />
