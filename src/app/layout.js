@@ -1,5 +1,6 @@
 import { Cormorant_Garamond, Jost } from "next/font/google";
 import "./globals.css";
+import FloatingWidgets from "@/components/FloatingWidgets";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${cormorant.variable} ${jost.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-bg-light text-text-dark">
         {children}
+        <FloatingWidgets />
       </body>
     </html>
   );
