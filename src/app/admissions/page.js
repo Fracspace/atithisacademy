@@ -7,6 +7,15 @@ import Footer from "@/components/Footer";
 
 export default function Admissions() {
   const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    message: ""
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const facts = [
     { label: "Duration", value: "12 Weeks" },
@@ -15,19 +24,13 @@ export default function Admissions() {
     { label: "Credential", value: "Certified Pro" },
   ];
 
-  const eligibility = [
-    "Minimum age 18, with a genuine passion for hospitality and service.",
-    "Class 12 / higher secondary completed (graduates and career-changers welcome).",
-    "Fluency or working proficiency in English; other languages an advantage.",
-    "Readiness to commit to a disciplined, six-days-a-week immersive schedule.",
-  ];
-
-  const steps = [
-    { n: "1", title: "Submit Inquiry", desc: "Complete the application form or download the brochure to begin.", line: true },
-    { n: "2", title: "Admissions Call", desc: "A one-on-one conversation to understand your goals and answer questions.", line: true },
-    { n: "3", title: "Personal Interview", desc: "A short interview and grooming assessment with the faculty panel.", line: true },
-    { n: "4", title: "Offer & Enrolment", desc: "Receive your offer, confirm your seat and complete enrolment formalities.", line: true },
-    { n: "5", title: "Orientation", desc: "Join your cohort for orientation and step into the Atithis Way.", line: false },
+  const admissionsSteps = [
+    { num: "01", title: "Submit Application", desc: "Fill out the online application form with basic educational details." },
+    { num: "02", title: "Counselling / Interaction", desc: "A personal conversation with our guides to understand your goals and compatibility." },
+    { num: "03", title: "Selection", desc: "Receive confirmation of admission based on interview performance and passion." },
+    { num: "04", title: "Fee & Documentation", desc: "Submit required academic documents and complete fee formalities." },
+    { num: "05", title: "Orientation", desc: "Introduction to academy rules, team members, uniforms, and standard practices." },
+    { num: "06", title: "Begin Your Atithis Journey", desc: "Step onto campus as a professional trainee ready to grow." }
   ];
 
   const fees = [
@@ -66,9 +69,46 @@ export default function Admissions() {
     },
   ];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError("");
+    const payload = {
+      name: `${formData.firstName} ${formData.lastName}`.trim(),
+      email: formData.email,
+      phoneNumber: formData.phoneNumber,
+      message: formData.message
+    };
+    console.log("Submitting admission application:", payload);
+    try {
+      const response = await fetch("https://atithisacademy-backend.onrender.com/api/admissions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+      const data = await response.json();
+      if (response.ok) {
+        console.log("Admission application submitted successfully:", data);
+        setSubmitted(true);
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phoneNumber: "",
+          message: ""
+        });
+      } else {
+        console.error("Admission application submission failed:", data);
+        setError(data.message || "Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      console.error("Admission application submission error:", err);
+      setError("Failed to connect to the server. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -111,49 +151,114 @@ export default function Admissions() {
           </div>
         </section>
 
-        {/* ELIGIBILITY + PROCESS */}
-        <section className="py-24 bg-bg-light px-5 sm:px-10">
-          <div className="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-[72px] items-start">
-            <div>
-              <div className="flex items-center gap-3.5 mb-5.5">
-                <span className="w-10 h-[1px] bg-accent"></span>
-                <span className="text-[12px] tracking-[0.3em] text-accent uppercase font-medium">Eligibility</span>
+        {/* WHO SHOULD JOIN & DETAILS */}
+        <section className="py-20 md:py-28 bg-white border-b border-[#e6e9ee] px-5 sm:px-10">
+          <div className="max-w-[1280px] mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+              
+              {/* Who Should Join */}
+              <div className="lg:col-span-7">
+                <span className="text-accent text-[14px] tracking-[0.2em] font-semibold uppercase">ELIGIBILITY & PROFILE</span>
+                <h2 className="font-serif font-bold text-[32px] sm:text-[42px] text-primary mt-2">WHO SHOULD JOIN?</h2>
+                <div className="mt-4 inline-block bg-accent/10 border border-accent text-primary text-[13px] tracking-wider uppercase font-bold py-2 px-5 rounded-sm mb-6">
+                  12th PASS / EQUIVALENT
+                </div>
+                
+                <h3 className="font-serif text-[18px] font-bold text-primary mb-4">THIS PROGRAMME IS FOR YOU IF…</h3>
+                <div className="flex flex-col gap-3">
+                  {[
+                    "You enjoy meeting and interacting with people",
+                    "You want a fast-tracked professional career path",
+                    "You prefer learning by doing rather than writing lengthy exams",
+                    "You want to work in premium hotels, luxury resorts or villas",
+                    "You want to develop core self-confidence and speech grooming",
+                    "You are willing to work hard and practice physically on-campus",
+                    "You want exposure to the real hospitality industry"
+                  ].map((item, idx) => (
+                    <div key={idx} className="text-[14px] text-text-muted flex gap-2">
+                      <span className="text-accent font-bold">✓</span> {item}
+                    </div>
+                  ))}
+                </div>
+
+                <p className="mt-6 text-[14px] text-text-muted italic border-l-2 border-accent pl-4 font-medium">
+                  You don't need to know everything before you arrive. You just need the willingness to learn.
+                </p>
               </div>
-              <h2 className="font-serif font-semibold text-[32px] sm:text-[46px] leading-tight text-primary">
-                Who should apply
-              </h2>
-              <div className="margin-top:28px mt-7 flex flex-col gap-4">
-                {eligibility.map((e, idx) => (
-                  <div key={idx} className="flex gap-3.5 items-start bg-white border border-[#e9ecf1] p-[18px_20px]">
-                    <span className="text-accent text-[15px] mt-0.5">◆</span>
-                    <span className="text-[15px] leading-relaxed text-text-muted font-medium">{e}</span>
-                  </div>
-                ))}
+
+              {/* Program Details */}
+              <div className="lg:col-span-5 bg-bg-light border border-[#e6e9ee] p-8 rounded-sm">
+                <span className="text-accent text-[12px] tracking-[0.2em] font-semibold uppercase block mb-2">BATCH SPECS</span>
+                <h3 className="font-serif font-bold text-[24px] text-primary mb-6">Programme Details</h3>
+                
+                <div className="flex flex-col gap-4">
+                  {[
+                    { label: "Programme", val: "90-Day Immersive Hospitality Programme" },
+                    { label: "Duration", val: "90 Training Days" },
+                    { label: "Days", val: "Monday–Saturday" },
+                    { label: "Batch 1", val: "9:00 AM–1:00 PM" },
+                    { label: "Batch 2", val: "2:00 PM–6:00 PM" },
+                    { label: "Students", val: "50 per batch" },
+                    { label: "Learning", val: "80% Practical / 20% Theory" },
+                    { label: "Mode", val: "On-campus / practical immersion" }
+                  ].map((detail, idx) => (
+                    <div key={idx} className="flex justify-between items-center gap-4 pb-3 border-b border-[#e6e9ee] last:border-0 last:pb-0">
+                      <span className="text-[13px] font-bold text-text-muted uppercase">{detail.label}</span>
+                      <span className="text-[13px] font-semibold text-primary text-right">{detail.val}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
+
             </div>
-            <div>
-              <div className="flex items-center gap-3.5 mb-5.5">
-                <span className="w-10 h-[1px] bg-accent"></span>
-                <span className="text-[12px] tracking-[0.3em] text-accent uppercase font-medium">Admission Process</span>
-              </div>
-              <h2 className="font-serif font-semibold text-[32px] sm:text-[46px] leading-tight text-primary">
-                Five steps to enrolment
-              </h2>
-              <div className="mt-8 flex flex-col">
-                {steps.map((s, idx) => (
-                  <div key={idx} className="flex gap-6 items-start pb-7 relative">
-                    <div className="flex flex-col items-center flex-shrink-0">
-                      <div className="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-serif text-[20px] font-semibold">
-                        {s.n}
-                      </div>
-                      {s.line && <div className="w-[1px] min-h-[36px] bg-[#dfe3e9] mt-1.5 flex-grow"></div>}
-                    </div>
-                    <div className="pt-2">
-                      <h3 className="font-serif text-[23px] text-primary font-bold">{s.title}</h3>
-                      <p className="mt-2 text-[15px] leading-relaxed text-text-muted font-light">{s.desc}</p>
-                    </div>
+          </div>
+        </section>
+
+        {/* ENROLMENT FLOW */}
+        <section className="py-20 md:py-28 bg-bg-light border-b border-[#e6e9ee] px-5 sm:px-10" id="admissions-flow">
+          <div className="max-w-[1280px] mx-auto">
+            <div className="text-center mb-16">
+              <span className="text-accent text-[14px] tracking-[0.2em] font-semibold uppercase">ENROLMENT FLOW</span>
+              <h2 className="font-serif font-bold text-[36px] sm:text-[48px] text-primary mt-2">YOUR JOURNEY STARTS HERE.</h2>
+              <p className="text-text-muted mt-3 text-[17px] max-w-[600px] mx-auto">
+                A simple, direct process to enter the academy.
+              </p>
+            </div>
+
+            {/* Steps timeline layout */}
+            <div className="grid grid-cols-1 md:grid-cols-6 gap-6 relative">
+              {admissionsSteps.map((step, idx) => (
+                <div key={idx} className="p-6 bg-white border border-[#e6e9ee] rounded-sm shadow-sm flex flex-col justify-between min-h-[200px]">
+                  <div>
+                    <span className="text-[28px] font-serif font-bold text-accent-light block leading-none mb-4">
+                      {step.num}
+                    </span>
+                    <h3 className="font-serif text-[16px] font-bold text-primary mb-2">{step.title}</h3>
                   </div>
-                ))}
+                  <p className="text-[12px] text-text-muted leading-relaxed font-light">{step.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Spec sheets */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 pt-8 border-t border-[#e6e9ee]">
+              <div className="p-6 bg-white border border-[#e6e9ee] rounded-sm">
+                <h4 className="font-serif font-bold text-[16px] text-primary mb-3 uppercase tracking-wider">Eligibility</h4>
+                <p className="text-[13px] text-text-muted leading-relaxed font-light">
+                  Completed class 12th/intermediate or equivalent. No prior hospitality background required. Minimum age 18.
+                </p>
+              </div>
+              <div className="p-6 bg-white border border-[#e6e9ee] rounded-sm">
+                <h4 className="font-serif font-bold text-[16px] text-primary mb-3 uppercase tracking-wider">Documents Required</h4>
+                <p className="text-[13px] text-text-muted leading-relaxed font-light">
+                  Copy of 10th and 12th marksheets, government identity proof (Aadhaar/Passport), passport size photographs.
+                </p>
+              </div>
+              <div className="p-6 bg-white border border-[#e6e9ee] rounded-sm">
+                <h4 className="font-serif font-bold text-[16px] text-primary mb-3 uppercase tracking-wider">Important Dates</h4>
+                <p className="text-[13px] text-text-muted leading-relaxed font-light">
+                  Batches commence every alternate month. Contact our admissions team for immediate batch registration dates.
+                </p>
               </div>
             </div>
           </div>
@@ -211,60 +316,73 @@ export default function Admissions() {
                 </div> */}
               </div>
               <div className="p-8 sm:p-14 sm:px-12">
-                {submitted ? (
-                  <div className="flex flex-col items-center justify-center h-full text-center py-10">
-                    <span className="font-serif text-[40px] text-accent italic font-medium">Thank you</span>
-                    <p className="mt-3.5 text-[16px] text-text-muted font-light max-w-[340px]">
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4.5">
+                  {error && <div className="text-red-500 text-sm font-semibold">{error}</div>}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4.5">
+                    <label className="flex flex-col gap-1.5">
+                      <span className="text-[12px] tracking-[0.1em] text-[#7A8798] uppercase font-semibold">First Name</span>
+                      <input
+                        required
+                        value={formData.firstName}
+                        onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                        className="p-[13px_14px] border border-[#dfe3e9] font-sans text-[15px] text-text-dark focus:border-accent focus:outline-none"
+                      />
+                    </label>
+                    <label className="flex flex-col gap-1.5">
+                      <span className="text-[12px] tracking-[0.1em] text-[#7A8798] uppercase font-semibold">Last Name</span>
+                      <input
+                        required
+                        value={formData.lastName}
+                        onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                        className="p-[13px_14px] border border-[#dfe3e9] font-sans text-[15px] text-text-dark focus:border-accent focus:outline-none"
+                      />
+                    </label>
+                  </div>
+                  <label className="flex flex-col gap-1.5">
+                    <span className="text-[12px] tracking-[0.1em] text-[#7A8798] uppercase font-semibold">Email</span>
+                    <input
+                      required
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="p-[13px_14px] border border-[#dfe3e9] font-sans text-[15px] text-text-dark focus:border-accent focus:outline-none"
+                    />
+                  </label>
+                  <label className="flex flex-col gap-1.5">
+                    <span className="text-[12px] tracking-[0.1em] text-[#7A8798] uppercase font-semibold">Phone</span>
+                    <input
+                      required
+                      value={formData.phoneNumber}
+                      onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
+                      className="p-[13px_14px] border border-[#dfe3e9] font-sans text-[15px] text-text-dark focus:border-accent focus:outline-none"
+                    />
+                  </label>
+                  <label className="flex flex-col gap-1.5">
+                    <span className="text-[12px] tracking-[0.1em] text-[#7A8798] uppercase font-semibold">Why Atithis?</span>
+                    <textarea
+                      required
+                      rows={3}
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      className="p-[13px_14px] border border-[#dfe3e9] font-sans text-[15px] text-text-dark resize-y focus:border-accent focus:outline-none"
+                    ></textarea>
+                  </label>
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="bg-primary !text-accent-light p-4 text-[13px] tracking-[0.14em] uppercase border-none cursor-pointer hover:bg-accent-light hover:!text-primary transition-all duration-300 mt-1.5 font-bold disabled:opacity-50"
+                  >
+                    {loading ? "Please wait while we submit..." : "Submit Application"}
+                  </button>
+                </form>
+
+                {submitted && (
+                  <div className="flex flex-col items-center justify-center mt-6 py-6 text-center bg-green-50/50 border border-green-200 rounded-sm">
+                    <span className="font-serif text-[24px] text-accent italic font-semibold">Thank you!</span>
+                    <p className="mt-1.5 text-[14px] text-text-muted font-light max-w-[340px]">
                       Your application inquiry has been received. Our admissions team will be in touch within two working days.
                     </p>
                   </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="flex flex-col gap-4.5">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4.5">
-                      <label className="flex flex-col gap-1.5">
-                        <span className="text-[12px] tracking-[0.1em] text-[#7A8798] uppercase font-semibold">First Name</span>
-                        <input
-                          required
-                          className="p-[13px_14px] border border-[#dfe3e9] font-sans text-[15px] text-text-dark focus:border-accent focus:outline-none"
-                        />
-                      </label>
-                      <label className="flex flex-col gap-1.5">
-                        <span className="text-[12px] tracking-[0.1em] text-[#7A8798] uppercase font-semibold">Last Name</span>
-                        <input
-                          required
-                          className="p-[13px_14px] border border-[#dfe3e9] font-sans text-[15px] text-text-dark focus:border-accent focus:outline-none"
-                        />
-                      </label>
-                    </div>
-                    <label className="flex flex-col gap-1.5">
-                      <span className="text-[12px] tracking-[0.1em] text-[#7A8798] uppercase font-semibold">Email</span>
-                      <input
-                        required
-                        type="email"
-                        className="p-[13px_14px] border border-[#dfe3e9] font-sans text-[15px] text-text-dark focus:border-accent focus:outline-none"
-                      />
-                    </label>
-                    <label className="flex flex-col gap-1.5">
-                      <span className="text-[12px] tracking-[0.1em] text-[#7A8798] uppercase font-semibold">Phone</span>
-                      <input
-                        required
-                        className="p-[13px_14px] border border-[#dfe3e9] font-sans text-[15px] text-text-dark focus:border-accent focus:outline-none"
-                      />
-                    </label>
-                    <label className="flex flex-col gap-1.5">
-                      <span className="text-[12px] tracking-[0.1em] text-[#7A8798] uppercase font-semibold">Why Atithis?</span>
-                      <textarea
-                        rows={3}
-                        className="p-[13px_14px] border border-[#dfe3e9] font-sans text-[15px] text-text-dark resize-y focus:border-accent focus:outline-none"
-                      ></textarea>
-                    </label>
-                    <button
-                      type="submit"
-                      className="bg-primary !text-accent-light p-4 text-[13px] tracking-[0.14em] uppercase border-none cursor-pointer hover:bg-accent-light hover:!text-primary transition-all duration-300 mt-1.5 font-bold"
-                    >
-                      Submit Application
-                    </button>
-                  </form>
                 )}
               </div>
             </div>

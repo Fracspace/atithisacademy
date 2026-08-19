@@ -272,6 +272,43 @@ export default function Home() {
           </div>
         </section>
 
+        {/* WHY ATITHIS? */}
+        <section className="py-24 md:py-32 bg-white border-y border-[#e6e9ee] px-5 sm:px-10">
+          <div className="max-w-[1280px] mx-auto">
+            <div className="text-center max-w-[640px] mx-auto mb-16">
+              <div className="flex items-center justify-center gap-3.5 mb-5.5">
+                <span className="w-10 h-[1px] bg-accent"></span>
+                <span className="text-[12px] tracking-[0.3em] text-accent uppercase font-medium">Why Atithis</span>
+                <span className="w-10 h-[1px] bg-accent"></span>
+              </div>
+              <h2 className="font-serif font-semibold text-[34px] sm:text-[54px] leading-[1.08] text-primary mt-2">
+                NOT ANOTHER CLASSROOM.
+              </h2>
+              <p className="text-text-muted mt-4 text-[17px] max-w-[600px] mx-auto">
+                Five simple principles that guide our training model.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+              {[
+                { title: "LEARN BY DOING", desc: "Practice before memorising. Hands-on experience is our primary teacher." },
+                { title: "REAL ENVIRONMENTS", desc: "Train in spaces designed exactly like working, luxury hospitality venues." },
+                { title: "PROFESSIONAL DISCIPLINE", desc: "Grooming, punctuality, communication, and workplace conduct are built into your daily curriculum." },
+                { title: "INDUSTRY EXPOSURE", desc: "Learn from hoteliers and experts who actually operate hospitality businesses." },
+                { title: "CAREER FIRST", desc: "Every module and skill is taught with the immediate workplace in mind." }
+              ].map((p, idx) => (
+                <div key={idx} className="p-7 bg-bg-light border border-[#e6e9ee] hover:shadow-md transition-all duration-300 rounded-sm flex flex-col justify-between">
+                  <div>
+                    <span className="text-[13px] text-accent tracking-[0.1em] font-bold block mb-4">0{idx + 1}</span>
+                    <h3 className="font-serif text-[19px] font-bold text-primary mb-3 leading-snug">{p.title}</h3>
+                    <p className="text-[14px] leading-relaxed text-text-muted font-light">{p.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* FIVE PILLARS */}
         <section className="py-24 bg-primary text-white px-5 sm:px-10">
           <div className="max-w-[1280px] mx-auto">
@@ -382,6 +419,52 @@ export default function Home() {
             <p className="text-center text-[11px] text-white/40 mt-5.5 tracking-[0.04em]">
               Brand names shown as placeholders — to be replaced with official partner assets. Not affiliated unless stated.
             </p>
+          </div>
+        </section>
+
+        {/* CAREERS AFTER ATITHIS */}
+        <section className="py-24 md:py-32 bg-white border-b border-[#e6e9ee] px-5 sm:px-10">
+          <div className="max-w-[1280px] mx-auto">
+            <div className="text-center max-w-[640px] mx-auto mb-16">
+              <div className="flex items-center justify-center gap-3.5 mb-5.5">
+                <span className="w-10 h-[1px] bg-accent"></span>
+                <span className="text-[12px] tracking-[0.3em] text-accent uppercase font-medium">Placement Outcomes</span>
+                <span className="w-10 h-[1px] bg-accent"></span>
+              </div>
+              <h2 className="font-serif font-semibold text-[34px] sm:text-[54px] leading-[1.08] text-primary mt-2">
+                Careers After Atithis
+              </h2>
+              <p className="text-text-muted mt-4 text-[17px] max-w-[600px] mx-auto">
+                Visualise your career pathway starting at top-tier boutique luxury spaces.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {[
+                "Front Office Associate",
+                "Guest Relations Associate",
+                "Housekeeping Associate",
+                "Villa Operations Associate",
+                "Resort Operations Associate",
+                "Spa Associate",
+                "Fitness Centre Associate",
+                "Laundry Operations Associate",
+                "Engineering Associate",
+                "Guest Experience Executive",
+                "Hospitality Sales Executive",
+                "Operations Executive"
+              ].map((role, idx) => (
+                <div key={idx} className="bg-bg-light p-5 border border-[#e6e9ee] hover:border-accent text-center transition-all duration-300 rounded-sm shadow-sm">
+                  <span className="block text-[14px] font-bold text-primary">{role}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="text-center mt-12">
+              <p className="font-serif italic text-accent font-bold text-[20px]">
+                "Your first role is only the beginning."
+              </p>
+            </div>
           </div>
         </section>
 

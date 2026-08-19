@@ -13,6 +13,8 @@ export default function FloatingWidgets() {
     subject: "Application for Admission",
     message: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     // Determine viewport width on client side
@@ -51,6 +53,8 @@ export default function FloatingWidgets() {
   const handleCloseModal = () => {
     setShowModal(false);
     setSubmitted(false);
+    setLoading(false);
+    setError("");
     sessionStorage.setItem("hospitality_form_auto_shown", "true");
     setFormData({
       name: "",
@@ -61,10 +65,40 @@ export default function FloatingWidgets() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    sessionStorage.setItem("hospitality_form_auto_shown", "true");
+    setLoading(true);
+    setError("");
+    const payload = {
+      name: formData.name,
+      email: formData.email,
+      phoneNumber: formData.phone,
+      message: formData.subject ? `[Subject: ${formData.subject}] ${formData.message}` : formData.message
+    };
+    console.log("Submitting floating admission application:", payload);
+    try {
+      const response = await fetch("https://atithisacademy-backend.onrender.com/api/admissions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+      const data = await response.json();
+      if (response.ok) {
+        console.log("Floating admission application submitted successfully:", data);
+        setSubmitted(true);
+        sessionStorage.setItem("hospitality_form_auto_shown", "true");
+      } else {
+        console.error("Floating admission application submission failed:", data);
+        setError(data.message || "Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      console.error("Floating admission application submission error:", err);
+      setError("Failed to connect to the server. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -248,7 +282,8 @@ export default function FloatingWidgets() {
                     </p>
                   </div>
 
-                  <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                   <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                    {error && <div className="text-red-500 text-sm font-semibold">{error}</div>}
                     <label className="flex flex-col gap-1.5">
                       <span className="text-[10px] tracking-[0.2em] text-[#B0894F] uppercase font-semibold">Full Name</span>
                       <input
@@ -307,9 +342,10 @@ export default function FloatingWidgets() {
 
                     <button
                       type="submit"
-                      className="bg-[#0F2747] !text-[#C9A96A] hover:bg-[#B0894F] hover:!text-white transition-all duration-300 py-4.5 rounded-xl text-xs font-bold uppercase tracking-[0.2em] shadow-lg shadow-accent/15 cursor-pointer mt-2"
+                      disabled={loading}
+                      className="bg-[#0F2747] !text-[#C9A96A] hover:bg-[#B0894F] hover:!text-white transition-all duration-300 py-4.5 rounded-xl text-xs font-bold uppercase tracking-[0.2em] shadow-lg shadow-accent/15 cursor-pointer mt-2 disabled:opacity-50"
                     >
-                      Submit Application
+                      {loading ? "Please wait while we submit..." : "Submit Application"}
                     </button>
                   </form>
                 </>

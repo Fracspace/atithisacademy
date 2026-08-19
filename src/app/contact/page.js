@@ -6,6 +6,15 @@ import Footer from "@/components/Footer";
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phoneNumber: "",
+    message: ""
+  });
+  const [subject, setSubject] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const contacts = [
     { icon: "✉", label: "Email", value: "admissions@atithis.academy" },
@@ -20,9 +29,46 @@ export default function Contact() {
 
   const socials = ["IN", "FB", "IG", "LI"];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError("");
+    const payload = {
+      name: formData.name,
+      email: formData.email,
+      phoneNumber: formData.phoneNumber,
+      message: subject ? `[Subject: ${subject}] ${formData.message}` : formData.message
+    };
+    console.log("Submitting contact enquiry:", payload);
+    try {
+      const response = await fetch("https://atithisacademy-backend.onrender.com/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+      const data = await response.json();
+      if (response.ok) {
+        console.log("Contact enquiry submitted successfully:", data);
+        setSubmitted(true);
+        setFormData({
+          name: "",
+          email: "",
+          phoneNumber: "",
+          message: ""
+        });
+        setSubject("");
+      } else {
+        console.error("Contact enquiry submission failed:", data);
+        setError(data.message || "Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      console.error("Contact enquiry submission error:", err);
+      setError("Failed to connect to the server. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -36,7 +82,7 @@ export default function Contact() {
           <div className="relative max-w-[1280px] mx-auto text-center z-10">
             <div className="flex items-center justify-center gap-3.5 mb-6">
               <span className="w-11 h-[1px] bg-accent"></span>
-              <span className="text-[12px] tracking-[0.32em] text-accent-light uppercase">Get in Touch</span>
+              <span className="text-[12px] tracking-[0.3em] text-accent-light uppercase">Get in Touch</span>
               <span className="w-11 h-[1px] bg-accent"></span>
             </div>
             <h1 className="font-serif font-semibold text-[42px] sm:text-[76px] leading-[1.05] text-white">
@@ -97,57 +143,72 @@ export default function Contact() {
             </div>
             <div className="bg-white border border-[#e6e9ee] p-6 sm:p-13">
               <h2 className="font-serif text-[32px] text-primary font-bold">Send us a message</h2>
-              {submitted ? (
-                <div className="flex flex-col items-center justify-center py-14 text-center">
-                  <span className="font-serif text-[38px] text-accent italic font-medium">Thank you</span>
-                  <p className="mt-3.5 text-[16px] text-text-muted font-light max-w-[320px]">
-                    Your message has been received. We will respond within two working days.
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4.5 mt-6.5">
+              <form onSubmit={handleSubmit} className="flex flex-col gap-4.5 mt-6.5">
+                {error && <div className="text-red-500 text-sm font-semibold">{error}</div>}
+                <label className="flex flex-col gap-1.5">
+                  <span className="text-[12px] tracking-[0.1em] text-[#7A8798] uppercase font-semibold">Full Name</span>
+                  <input
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="p-[13px_14px] border border-[#dfe3e9] font-sans text-[15px] text-text-dark focus:border-accent focus:outline-none"
+                  />
+                </label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4.5">
                   <label className="flex flex-col gap-1.5">
-                    <span className="text-[12px] tracking-[0.1em] text-[#7A8798] uppercase font-semibold">Full Name</span>
+                    <span className="text-[12px] tracking-[0.1em] text-[#7A8798] uppercase font-semibold">Email</span>
                     <input
                       required
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="p-[13px_14px] border border-[#dfe3e9] font-sans text-[15px] text-text-dark focus:border-accent focus:outline-none"
                     />
                   </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4.5">
-                    <label className="flex flex-col gap-1.5">
-                      <span className="text-[12px] tracking-[0.1em] text-[#7A8798] uppercase font-semibold">Email</span>
-                      <input
-                        required
-                        type="email"
-                        className="p-[13px_14px] border border-[#dfe3e9] font-sans text-[15px] text-text-dark focus:border-accent focus:outline-none"
-                      />
-                    </label>
-                    <label className="flex flex-col gap-1.5">
-                      <span className="text-[12px] tracking-[0.1em] text-[#7A8798] uppercase font-semibold">Phone</span>
-                      <input
-                        required
-                        className="p-[13px_14px] border border-[#dfe3e9] font-sans text-[15px] text-text-dark focus:border-accent focus:outline-none"
-                      />
-                    </label>
-                  </div>
                   <label className="flex flex-col gap-1.5">
-                    <span className="text-[12px] tracking-[0.1em] text-[#7A8798] uppercase font-semibold">Subject</span>
-                    <input className="p-[13px_14px] border border-[#dfe3e9] font-sans text-[15px] text-text-dark focus:border-accent focus:outline-none" />
+                    <span className="text-[12px] tracking-[0.1em] text-[#7A8798] uppercase font-semibold">Phone</span>
+                    <input
+                      required
+                      value={formData.phoneNumber}
+                      onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
+                      className="p-[13px_14px] border border-[#dfe3e9] font-sans text-[15px] text-text-dark focus:border-accent focus:outline-none"
+                    />
                   </label>
-                  <label className="flex flex-col gap-1.5">
-                    <span className="text-[12px] tracking-[0.1em] text-[#7A8798] uppercase font-semibold">Message</span>
-                    <textarea
-                      rows={4}
-                      className="p-[13px_14px] border border-[#dfe3e9] font-sans text-[15px] text-text-dark resize-y focus:border-accent focus:outline-none"
-                    ></textarea>
-                  </label>
-                  <button
-                    type="submit"
-                    className="bg-primary !text-accent-light p-4 text-[13px] tracking-[0.14em] uppercase border-none cursor-pointer hover:bg-accent-light hover:!text-primary transition-all duration-300 font-bold"
-                  >
-                    Send Message
-                  </button>
-                </form>
+                </div>
+                <label className="flex flex-col gap-1.5">
+                  <span className="text-[12px] tracking-[0.1em] text-[#7A8798] uppercase font-semibold">Subject</span>
+                  <input
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
+                    className="p-[13px_14px] border border-[#dfe3e9] font-sans text-[15px] text-text-dark focus:border-accent focus:outline-none"
+                  />
+                </label>
+                <label className="flex flex-col gap-1.5">
+                  <span className="text-[12px] tracking-[0.1em] text-[#7A8798] uppercase font-semibold">Message</span>
+                  <textarea
+                    required
+                    rows={4}
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="p-[13px_14px] border border-[#dfe3e9] font-sans text-[15px] text-text-dark resize-y focus:border-accent focus:outline-none"
+                  ></textarea>
+                </label>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="bg-primary !text-accent-light p-4 text-[13px] tracking-[0.14em] uppercase border-none cursor-pointer hover:bg-accent-light hover:!text-primary transition-all duration-300 font-bold disabled:opacity-50"
+                >
+                  {loading ? "Please wait while we submit..." : "Send Message"}
+                </button>
+              </form>
+
+              {submitted && (
+                <div className="flex flex-col items-center justify-center mt-6 py-6 text-center bg-green-50/50 border border-green-200 rounded-sm">
+                  <span className="font-serif text-[24px] text-accent italic font-semibold">Thank you!</span>
+                  <p className="mt-1.5 text-[14px] text-text-muted font-light max-w-[320px]">
+                    Your message has been received. We will respond within two working days.
+                  </p>
+                </div>
               )}
             </div>
           </div>
